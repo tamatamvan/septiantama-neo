@@ -42,6 +42,8 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // add abilities to use Vue 3 composition API https://composition-api.nuxtjs.org
+    '@nuxtjs/composition-api',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -57,4 +59,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
+  // https://github.com/nuxt-community/composition-api/issues/44
+  generate: {
+    // choose to suit your project
+    interval: 2000,
+  },
 }
