@@ -4,6 +4,7 @@
       <Logo />
       <h1 class="title">septiantama-neo</h1>
       <div class="links">
+        <NuxtLink to="/unspokens"> to unspokens</NuxtLink>
         <a
           href="https://nuxtjs.org/"
           target="_blank"
