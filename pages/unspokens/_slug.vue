@@ -1,24 +1,16 @@
 <script lang="ts">
-import {
-  defineComponent,
-  useStatic,
-  useContext,
-  computed,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
 import format from 'date-fns/format'
 
 export default defineComponent({
   setup() {
     const { $content, params } = useContext()
-    const slug = computed(() => params.value.slug)
-    const article = useStatic(
-      async (slug) => await $content('unspokens', slug).fetch(),
-      slug,
-      'article'
+    const article = useAsync(
+      async () => await $content('unspokens', params.value.slug).fetch()
     )
 
     return {
-      article: article.value,
+      article,
       format,
     }
   },
