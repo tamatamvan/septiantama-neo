@@ -56,7 +56,8 @@ export default defineComponent({
         <p>
           Published at:
           <span class="block">{{
-            article && format(new Date(article.date), 'LLL Do, yyyy - h:m bbbb')
+            article &&
+            format(new Date(article.date), 'LLL do, yyyy - h:mm bbbb')
           }}</span>
         </p>
       </div>
