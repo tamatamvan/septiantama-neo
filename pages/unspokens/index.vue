@@ -9,7 +9,13 @@ export default defineComponent({
   },
   setup() {
     const { $content } = useContext()
-    const articles = useAsync(async () => await $content('unspokens').fetch())
+    const articles = useAsync(
+      async () =>
+        await $content('unspokens')
+          .only(['title', 'date', 'description', 'slug'])
+          .sortBy('createdAt', 'desc')
+          .fetch()
+    )
 
     return {
       format,
@@ -33,7 +39,7 @@ export default defineComponent({
       </h3>
       <div class="article-item-info text-sm pb-2">
         Published at:
-        {{ format(new Date(article.date), 'LLL Do, yyyy - h:m bbbb') }}
+        {{ format(new Date(article.date), 'LLL do, yyyy - h:mm bbbb') }}
       </div>
       <p class="article-item-summary">
         {{ article.description }}
