@@ -1,7 +1,7 @@
 <script>
 import format from 'date-fns/format'
 import { defineComponent, useContext, useAsync } from '@nuxtjs/composition-api'
-import PageTitle from '../../components/commons/PageTitle'
+import PageTitle from '~/components/commons/PageTitle'
 
 export default defineComponent({
   components: {
