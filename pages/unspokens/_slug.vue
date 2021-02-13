@@ -6,6 +6,7 @@ import ChevronLeftDouble from '~/components/icons/ChevronLeftDouble.vue'
 import ChevronRightDouble from '~/components/icons/ChevronRightDouble.vue'
 import IconWrapper from '~/components/commons/IconWrapper.vue'
 import LineHeading from '~/components/commons/LineHeading.vue'
+import PrevNextNav from '~/components/commons/PrevNextNav.vue'
 
 export default defineComponent({
   setup() {
@@ -33,6 +34,7 @@ export default defineComponent({
     ChevronLeftDouble,
     ChevronRightDouble,
     LineHeading,
+    PrevNextNav,
   },
 })
 </script>
@@ -90,30 +92,7 @@ export default defineComponent({
         <LineHeading>
           <h4 class="text-xl text-center font-bold m-8">Other Pieces</h4>
         </LineHeading>
-        <div v-if="cursor" class="cursor w-full flex mt-4">
-          <div v-if="cursor[0]" class="prev w-1/2">
-            <nuxt-link
-              :to="`/unspokens/${cursor[0].slug}`"
-              class="flex items-center"
-            >
-              <IconWrapper class="mr-2">
-                <ChevronLeftDouble />
-              </IconWrapper>
-              {{ cursor[0].title }}
-            </nuxt-link>
-          </div>
-          <div v-if="cursor[1]" class="next w-1/2">
-            <nuxt-link
-              :to="`/unspokens/${cursor[1].slug}`"
-              class="flex items-center justify-end"
-            >
-              {{ cursor[1].title }}
-              <IconWrapper class="ml-2">
-                <ChevronRightDouble />
-              </IconWrapper>
-            </nuxt-link>
-          </div>
-        </div>
+        <PrevNextNav :cursor="cursor" />
       </div>
     </div>
   </article>
