@@ -2,17 +2,39 @@
 import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
 import format from 'date-fns/format'
 
+import ChevronLeftDouble from '~/components/icons/ChevronLeftDouble.vue'
+import ChevronRightDouble from '~/components/icons/ChevronRightDouble.vue'
+import IconWrapper from '~/components/commons/IconWrapper.vue'
+import LineHeading from '~/components/commons/LineHeading.vue'
+import PrevNextNav from '~/components/commons/PrevNextNav.vue'
+
 export default defineComponent({
   setup() {
     const { $content, params } = useContext()
     const article = useAsync(
       async () => await $content('unspokens', params.value.slug).fetch()
     )
+    const cursor = useAsync(
+      async () =>
+        await $content('unspokens')
+          .only(['title', 'slug'])
+          .sortBy('createdAt', 'asc')
+          .surround(params.value.slug)
+          .fetch()
+    )
 
     return {
       article,
+      cursor,
       format,
     }
+  },
+  components: {
+    IconWrapper,
+    ChevronLeftDouble,
+    ChevronRightDouble,
+    LineHeading,
+    PrevNextNav,
   },
 })
 </script>
@@ -63,9 +85,15 @@ export default defineComponent({
       </div>
     </div>
     <div
-      class="min-h-screen w-full md:w-1/2 md:ml-auto justify-self-end p-16 lg:p-32 flex items-center justify-center"
+      class="min-h-screen w-full md:w-1/2 md:ml-auto p-16 lg:p-32 flex flex-col items-center justify-center"
     >
       <nuxt-content :document="article" />
+      <div class="other-pieces w-full">
+        <LineHeading>
+          <h4 class="text-xl text-center font-bold m-8">Other Pieces</h4>
+        </LineHeading>
+        <PrevNextNav :cursor="cursor" />
+      </div>
     </div>
   </article>
 </template>
